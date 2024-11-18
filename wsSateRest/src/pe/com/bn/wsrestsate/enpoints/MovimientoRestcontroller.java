@@ -22,7 +22,7 @@ public class MovimientoRestcontroller {
     private final MovimentoService movimientoService;
 
     @PostMapping("/crearMovimientosPrueba")
-    public ResponseEntity<?> crearMovimientosPrueba(@RequestBody RequestWS request) {
+    public ResponseEntity<ResponseWS> crearMovimientosPrueba(@RequestBody RequestWS request) {
         try {
             List<Movimiento> movimientos = movimientoService.crearMovimientosPrueba(
                     request.getNumTarjeta(),

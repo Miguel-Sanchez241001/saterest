@@ -13,10 +13,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
 @Configuration
+@EnableSwagger2
 public class SwaggerConfig {
 
     @Bean
@@ -26,7 +28,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("pe.com.bn.wsrestsate.enpoints")) // Ajusta al paquete de tus controladores
                 .paths(PathSelectors.any())
                 .build()
-                .pathMapping("/wsSateRest") // Especifica el contexto base
+               
                 .apiInfo(apiInfo());
     }
 
