@@ -9,6 +9,6 @@
 			xmi:id="PortQnameBinding_1731991559251"
 			portQnameNamespaceLink="http://service.ws.comp.bn.com.pe"
 			portQnameLocalNameLink="ParametroInterfazKey"
-			overriddenEndpointURI="http://desktop-v992aca:8089/mockParametroInterfazKeySoapBinding" />
+			overriddenEndpointURI="http://srv1dihai1.bn.com.pe/WSParamService12v2/services/ParametroInterfazKey" />
 	</serviceRefs>
 </com.ibm.etools.webservice.wscbnd:ClientBinding>

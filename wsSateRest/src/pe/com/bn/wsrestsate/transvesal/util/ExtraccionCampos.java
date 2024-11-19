@@ -10,15 +10,23 @@ public class ExtraccionCampos {
         Map<String, String> valores = new HashMap<>();
 
         for (EstructuraCampo campo : estructura) {
-            int inicio = campo.getPosicionInicial() - 1; // Restar 1 porque las posiciones empiezan en 1
-            int fin = campo.getPosicionFinal();
+            int inicio = campo.getPosicionInicial(); 
+            int fin = campo.getDimension();
             if (linea.length() >= fin) {
-                valores.put(campo.getNombre(), linea.substring(inicio, fin).trim());
+            	
+                valores.put(campo.getNombre(), extractSubstring(linea,inicio, fin));
             } else {
                 valores.put(campo.getNombre(), ""); // Si no existe el campo, dejar vacío
             }
         }
 
         return valores;
+    }
+    public static  String extractSubstring(String input, int start, int length) {
+        if (input == null || start < 0 || length < 0 || start + length > input.length()) {
+            throw new IllegalArgumentException("Rango de índices inválido o entrada nula");
+        }
+        start = start -1;
+        return input.substring(start, start + length);
     }
 }

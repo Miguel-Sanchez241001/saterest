@@ -95,7 +95,7 @@
   </wsdl:binding>
   <wsdl:service name="ParametroInterfazKeyService">
     <wsdl:port binding="impl:ParametroInterfazKeySoapBinding" name="ParametroInterfazKey">
-      <wsdlsoap:address location="http://desktop-v992aca:8089/mockParametroInterfazKeySoapBinding"/>
+      <wsdlsoap:address location="http://srv1dihai1.bn.com.pe/WSParamService12v2/services/ParametroInterfazKey"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

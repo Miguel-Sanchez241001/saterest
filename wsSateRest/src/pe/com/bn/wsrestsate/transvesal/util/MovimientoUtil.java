@@ -160,7 +160,7 @@ public class MovimientoUtil {
 
     private Date parseDate(String dateString) throws ApplicationException {
         try {
-            SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
             return format.parse(dateString);
         } catch (Exception e) {
             logger.error("Error al parsear la fecha: {}", dateString, e);

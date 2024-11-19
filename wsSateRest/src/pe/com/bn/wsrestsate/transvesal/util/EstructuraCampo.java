@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class EstructuraCampo {
     private final int posicionInicial;
-    private final int posicionFinal;
+    private final int dimension;
     private final String nombre;
 }
