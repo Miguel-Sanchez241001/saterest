@@ -3,6 +3,8 @@ package pe.com.bn.wsrestsate.model.sate;
 import lombok.Data;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Data
 public class Movimiento {
     private String tipoRegistro;             // Posición 1
@@ -11,6 +13,7 @@ public class Movimiento {
     private String codigoCliente;            // Posición 7-20
     private String numeroCuenta;             // Posición 21-39
     private String codigoMoneda;             // Posición 40-43
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date fechaTransaccion;           // Posición 44-51
     private String claseTransaccion;         // Posición 52-53
     private String codigoTransaccion;        // Posición 54-56
@@ -27,6 +30,7 @@ public class Movimiento {
     private String cuentaCargo;              // Posición 168-181
     private String origenTransaccion;        // Posición 182-188
     private String codigoAutorizacion;       // Posición 189-194
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date fechaProceso;               // Posición 195-202
     private String codigoPlan;               // Posición 203-207
     private String codigoTransaccionOrigen;  // Posición 208-210
