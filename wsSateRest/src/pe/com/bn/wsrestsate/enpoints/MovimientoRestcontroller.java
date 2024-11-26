@@ -2,9 +2,9 @@ package pe.com.bn.wsrestsate.enpoints;
 
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-
- 
+import pe.com.bn.wsrestsate.model.MovimientoDTO;
 import pe.com.bn.wsrestsate.model.ResponseWS;
+import pe.com.bn.wsrestsate.model.ResponseWSDTO;
 import pe.com.bn.wsrestsate.model.sate.Movimiento;
 import pe.com.bn.wsrestsate.model.sate.MovimientoRequest;
 import pe.com.bn.wsrestsate.service.MovimentoService;
@@ -35,7 +35,7 @@ public class MovimientoRestcontroller {
             logger.info("Iniciando crearMovimientosPrueba con request: {}", request);
 
             List<Movimiento> movimientos = movimientoService.crearMovimientosPrueba(
-                    request.getNumTarjeta(), request.getFechaInicio(), request.getFechaFin()
+                    request.getNumCuenta(), request.getFechaInicio(), request.getFechaFin()
             );
             logger.info("Movimientos de prueba generados exitosamente.");
 
@@ -113,31 +113,27 @@ public class MovimientoRestcontroller {
     }
 
     /**
-     * Endpoint que obtiene movimientos reales desde SFTP para una fecha específica.
+     * Endpoint que obtiene movimientos en un rango de fechas y numCuenta.
      */
-    @PostMapping("/obtenerMovimientos")
-    public ResponseEntity<ResponseWS> obtenerMovimientos(@RequestBody MovimientoRequest request) {
+    @PostMapping("/listarMovimientosRangoAndCount")
+    public ResponseEntity<ResponseWSDTO> listarMovimientosRangoAndCount(@RequestBody MovimientoRequest request) {
         try {
-            logger.info("Iniciando obtenerMovimientos con request: {}", request);
+            logger.info("Iniciando listarMovimientosRango con request: {}", request);
 
-            List<Movimiento> movimientos = movimientoService.obtenerMovimientosDesdeSftp(request.getFechaInicio());
-
-            if (movimientos.isEmpty()) {
-                throw new NoMovementsFoundException();
-            }
+            List<MovimientoDTO> movimientos = movimientoService.obtenerMovimientosEnRangoFiltro(request);
 
             logger.info("Movimientos obtenidos exitosamente.");
 
-            return ResponseEntity.ok(new ResponseWS(ResponseCode.SUCCESS, movimientos));
+            return ResponseEntity.ok(new ResponseWSDTO(ResponseCode.SUCCESS, movimientos));
         } catch (NoMovementsFoundException e) {
             logger.warn("No se encontraron movimientos: {}", e.getMessage());
-            return ResponseEntity.ok(new ResponseWS(e.getResponseCode(), null));
+            return ResponseEntity.ok(new ResponseWSDTO(e.getResponseCode(), null));
         } catch (ApplicationException e) {
-            logger.error("Error en obtenerMovimientos: {}", e.getMessage(), e);
-            return ResponseEntity.ok(new ResponseWS(e.getResponseCode(), null));
+            logger.error("Error en listarMovimientosRango: {}", e.getMessage(), e);
+            return ResponseEntity.ok(new ResponseWSDTO(e.getResponseCode(), null));
         } catch (Exception e) {
-            logger.error("Error inesperado en obtenerMovimientos: {}", e.getMessage(), e);
-            return ResponseEntity.ok(new ResponseWS(ResponseCode.UNEXPECTED_ERROR, null));
+            logger.error("Error inesperado en listarMovimientosRango: {}", e.getMessage(), e);
+            return ResponseEntity.ok(new ResponseWSDTO(ResponseCode.UNEXPECTED_ERROR, null));
         }
     }
 }

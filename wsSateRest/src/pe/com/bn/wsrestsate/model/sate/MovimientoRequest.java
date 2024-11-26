@@ -7,5 +7,5 @@ import lombok.Data;
 public class MovimientoRequest {
     private String fechaInicio;
     private String fechaFin; // Opcional, depende del endpoint
-    private String numTarjeta; // Agregado para el endpoint de prueba
+    private String numCuenta; // Agregado para el endpoint de prueba
 }

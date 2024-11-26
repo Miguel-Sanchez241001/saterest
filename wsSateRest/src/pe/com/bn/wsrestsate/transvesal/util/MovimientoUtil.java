@@ -53,14 +53,14 @@ public class MovimientoUtil {
         try (ZipInputStream zis = new ZipInputStream(zipStream)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
-                logger.info("Procesando entrada del ZIP: {}", entry.getName());
 
                 // Convertir fecha de DDMMAAAA a AAMMDD (YYMMDD)
                 String fechaAAMMDD = convertirFechaAAMMDD(fechaDDMMAAAA);
 
                 String expectedTxtFileName = String.format(TXT_FILE_NAME_FORMAT, fechaAAMMDD);
                 if (entry.getName().equals(expectedTxtFileName)) {
-                    archivoTxtEncontrado = true;
+                    logger.debug("Procesando entrada del ZIP: {}", entry.getName());
+                	archivoTxtEncontrado = true;
 
                     // Leer la entrada ZIP manualmente en un ByteArrayOutputStream
                     ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -181,7 +181,7 @@ public class MovimientoUtil {
             SimpleDateFormat outputFormat = new SimpleDateFormat("yyMMdd");
             Date date = inputFormat.parse(fechaDDMMAAAA);
             String fechaAAMMDD = outputFormat.format(date);
-            logger.info("Fecha convertida de {} a {}", fechaDDMMAAAA, fechaAAMMDD);
+           // logger.debug("Fecha convertida de {} a {}", fechaDDMMAAAA, fechaAAMMDD);
             return fechaAAMMDD;
         } catch (ParseException e) {
             logger.error("Error al convertir la fecha: {}", fechaDDMMAAAA, e);
